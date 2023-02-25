@@ -10,9 +10,9 @@
         <div class="col-md-12">
             <div class="error-template">
                 <h1>
-                    Unauthotized</h1>
+                    You are Unauthorized to view this page.</h1>
                 <h2>
-                    You are not Authorized to view this page</h2>
+                    ${username} having role of ${listOfRoles} is not allowed to perform this action Please contact one of the admins to get appropriate role</h2>
                 <div class="error-details">
                     You may not be authorized to view this page
                 </div>
