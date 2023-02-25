@@ -154,7 +154,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">${userdetails.username}<br>(${userdetails.firm_name})</a>
+          <a href="#" class="d-block">${userdetails.username}<br>(${userdetails.firm_name}${userdetails.store_name})</a>
         </div>
       </div>
       
