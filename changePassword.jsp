@@ -47,7 +47,42 @@ $(document).ready(function(){
 	  });
 	});
 
+document.getElementById("divTitle").innerHTML="Change Password";
 
+function changePasswordAjax()
+{	
+	var oldPassword= encodeURIComponent(document.getElementById("txtoldpassword").value);
+	var newPassword= encodeURIComponent(document.getElementById("txtnewpassword").value);
+	var confirmnewpassword= encodeURIComponent(document.getElementById("txtconfirmnewpassword").value);
+	
+	
+	if(confirmnewpassword!=newPassword)
+		{
+			alert("New password and Confirm Password should be same");
+			return;	
+		}
+	
+	
+	
+	
+	
+	var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() 
+	  {
+	    if (xhttp.readyState == 4 && xhttp.status == 200) 
+	    { 		     
+	    	 
+	    	 
+	    	 document.getElementById("responseText").innerHTML=xhttp.responseText;
+	   	  document.getElementById("closebutton").style.display='block';
+	   	  document.getElementById("loader").style.display='none';
+	   	  $('#myModal').modal({backdrop: 'static', keyboard: false});;	    	 
+	    
+		}
+	  };
+	  xhttp.open("POST","?a=changePassword&oldPassword="+oldPassword+"&newPassword="+newPassword,true);    
+	  xhttp.send();	
+}
 </script>
 
 <div class="container">
