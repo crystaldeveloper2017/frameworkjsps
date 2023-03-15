@@ -184,10 +184,11 @@ body, html {
 	{
 		
 		
-		
+		alert('Please contact your admin of your organization to reset your password');
+		return;
 		
 		var str=window.location;
-		window.location=str.toString().replace("Login.jsp","?a=showForgotPasswordScreen");
+		window.location=str.toString().replace("Login.jsp","../?a=showForgotPasswordScreen");
 			
 	}
 </script>
