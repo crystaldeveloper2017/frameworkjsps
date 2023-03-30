@@ -1,9 +1,10 @@
 
 <script>
 
-	if(window.location.href.indexOf("schoolmanagement") > -1)
+	if(window.location.href.indexOf("adarshdairy") > -1)
 	{
-		window.location='http://www.schoolmanagementindia.in/StudentQrLatest/Login.jsp';
+		alert('This domain is no longer supported. Please use hisaabcloud.in');
+		window.location='https://hisaabcloud.in/CustomizedPOS';
 	}
 </script>
 
@@ -184,10 +185,11 @@ body, html {
 	{
 		
 		
-		
+		alert('Please contact your admin of your organization to reset your password');
+		return;
 		
 		var str=window.location;
-		window.location=str.toString().replace("Login.jsp","?a=showForgotPasswordScreen");
+		window.location=str.toString().replace("Login.jsp","../?a=showForgotPasswordScreen");
 			
 	}
 </script>
