@@ -166,7 +166,7 @@ body, html {
 	    	  }
 	    }
 	  };
-	  xhttp.open("POST", "../BaseController?actionName=validateLogin", true);
+	  xhttp.open("POST", "../?actionName=validateLogin", true);
 	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	  xhttp.send("txtusername="+username.value+"&txtpassword="+password.value);
 	  
