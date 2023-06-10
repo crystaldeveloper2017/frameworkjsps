@@ -397,7 +397,6 @@ function searchElement(txtsearch)
 <script>
 window.addEventListener('keydown', function(e) {
   if (e.altKey == true && e.keyCode == 76){
-    console.log('Alt + L'); 
     logout();
   }
 });
