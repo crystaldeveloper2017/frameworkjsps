@@ -401,3 +401,10 @@ window.addEventListener('keydown', function(e) {
   }
 });
 </script>
+<script>
+window.addEventListener('keydown', function(e) {
+  if (e.altKey == true && e.shiftKey == true && e.keyCode == 82){
+    window.location.href = "?a=reloadSession";
+  }
+});
+</script>
