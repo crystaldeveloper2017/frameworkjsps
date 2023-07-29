@@ -424,14 +424,7 @@ body, html {
   </div>
 </form>
 
-  <div align="center">
-            	Designed and Developed By <br> 
-            	<a href="mailto:crystaldevelopers2017@gmail.com">Crystal Developers</a>
-            	
-            </div>
-
-        </div><!-- /card-container -->
-    </div><!-- /container -->
+  
 
 
 
