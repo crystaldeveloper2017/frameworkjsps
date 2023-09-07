@@ -1,6 +1,7 @@
 
 <style>
-.datepicker {position: relative; z-index:100;}
+	.date_field {position: relative; z-index:1000;}
+	.ui-datepicker{position: relative; z-index:1000!important;}
 </style>
 
 
