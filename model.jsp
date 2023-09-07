@@ -9,6 +9,8 @@
 <c:set var="jspName" value='${requestScope["outputObject"].get("contentJspName")}' />
 
 <c:set var="userName" value='${requestScope["outputObject"].get("userName")}' />
+<c:set var="elementsDB" value='${requestScope["outputObject"].get("elementsDB")}' />
+
 
 
 
@@ -178,7 +180,7 @@
          
          
          
-         <c:forEach items="${elements}" var="item">	  
+         <c:forEach items="${elementsDB}" var="item">	  
 	   <li class="nav-item has-treeview" name="listItemParentElements" id="${item.getElementName()}">         
             <a href="#" name="anchorParentElement" class="nav-link" style="color:floralwhite;font-weight:800"><i class="nav-icon fas fa-tachometer-alt"></i><p>${item.getElementName()}<i class="right fas fa-angle-left"></i></p></a>	          
             <ul class="nav nav-treeview">
