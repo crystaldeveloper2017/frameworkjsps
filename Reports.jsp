@@ -182,7 +182,8 @@
 
 									<c:when test="${fn:contains(columnobj.get('column_value'), '~delete')}">
 										<c:set var="deleteValue" value="${fn:split(columnobj.get('column_value'), '~')}" />
-										<td><a href="?a=${deleteValue[1]}&${deleteValue[2]}=${reportData.get(deleteValue[2])}">Delete	</a></td>
+									<td><input type="button" class="btn btn-danger" value="Delete" onclick="DeleteThis('${deleteValue[1]}','${deleteValue[2]}','${reportData.get(deleteValue[2])}')"></td>
+
 									</c:when>
 
 									<c:otherwise>
@@ -212,7 +213,38 @@
 <script>
 
 
+function DeleteThis(action,key,value)
+		{
 
+		
+		
+			var answer = window.confirm("Are you sure you want to delete ?");
+			if (!answer) 
+			{
+				return;    
+			}
+			
+			
+			var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() 
+			  {
+			    if (xhttp.readyState == 4 && xhttp.status == 200) 
+			    { 		      
+			    	toastr["success"](xhttp.responseText);
+			    	toastr.options = {"closeButton": false,"debug": false,"newestOnTop": false,"progressBar": false,
+			    	  "positionClass": "toast-top-right","preventDuplicates": false,"onclick": null,"showDuration": "1000",
+			    	  "hideDuration": "500","timeOut": "500","extendedTimeOut": "500","showEasing": "swing","hideEasing": "linear",
+			    	  "showMethod": "fadeIn","hideMethod": "fadeOut"}
+			    	
+			    	window.location.reload();
+		      
+			      
+				  
+				}
+			  };
+			  xhttp.open("GET","?a="+action+"&"+key+"="+value, true);    
+			  xhttp.send();
+		}
 
 	
 	
