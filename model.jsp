@@ -163,7 +163,7 @@
       
       <div class="form-inline sidebar-search-open">
 <div class="input-group" ">
-<input class="form-control form-control-sidebar" onkeyup="searchElement(this)" placeholder="Search" aria-label="Search">
+<input class="form-control form-control-sidebar" id="txtseachsidebar" onkeyup="searchElement(this)" placeholder="Search" aria-label="Search">
 <div class="input-group-append">
 <button class="btn btn-sidebar">
 <i class="fas fa-fw fa-search"></i>
@@ -410,4 +410,14 @@ window.addEventListener('keydown', function(e) {
     window.location.href = "?a=reloadSession";
   }
 });
+
+
+
+
+ 
+
+
+ window.onload = function() {
+  document.getElementById("txtseachsidebar").focus();
+};
 </script>
