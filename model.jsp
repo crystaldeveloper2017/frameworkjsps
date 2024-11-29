@@ -420,4 +420,30 @@ window.addEventListener('keydown', function(e) {
  window.onload = function() {
   document.getElementById("txtseachsidebar").focus();
 };
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'F') {
+      document.getElementById("txtseachsidebar").focus();
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'F') {
+      document.getElementById("txtseachsidebar").focus();
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'H') {
+      window.location="?a=showHomePage";
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'L') {
+      logout();
+    }
+});
+
+
 </script>
