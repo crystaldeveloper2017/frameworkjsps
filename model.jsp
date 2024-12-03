@@ -130,6 +130,10 @@
           <a href="?a=showChangePassword" class="dropdown-item">
             <strong>Change Password</strong>
           </a>
+
+          <a href="?a=showShortcuts" class="dropdown-item">
+            <strong>Shortcuts</strong>
+          </a>
          
           <a href="javascript:logout();" class="dropdown-item" id="refLogout">
             <div class="dropdown-divider"></div>
