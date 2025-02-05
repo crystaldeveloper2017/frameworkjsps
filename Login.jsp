@@ -421,6 +421,9 @@ body, html {
 <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" onclick="login()">Sign in</button>
 <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" onclick="showForgotPasswordScreen()">Forgot Password</button>
 
+
+<a align="center" href="https://hisaabcloud.in/privacypolicy" style="display: block; text-align: center; margin-top: 10px;">Privacy Policy</a>
+
   </div>
 </form>
 
