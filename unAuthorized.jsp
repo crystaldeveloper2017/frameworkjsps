@@ -1,4 +1,4 @@
-
+listOfRoles
 <script src="js/jquery.min.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="js/bootstrap.min.js"></script>
@@ -12,7 +12,7 @@
                 <h1>
                     You are Unauthorized to view this page.</h1>
                 <h2>
-                    ${username} having role of ${listOfRoles} is not allowed to perform this action Please contact one of the admins to get appropriate role</h2>
+                    ${username} having role of ${listOfRoles} is not allowed to perform this action: "${param.a}" Please contact one of the admins to get appropriate role</h2>
                 <div class="error-details">
                     You may not be authorized to view this page
                 </div>
