@@ -110,6 +110,7 @@
                         {"Ctrl + Shift + H","Takes you to the home page"},
                         {"Ctrl + Shift + F","Focuses on the element search textbox"},
                         {"Ctrl + Shift + L","Logs you out of the application"},
+                        {"Alt + Left Arrow","Takes you to the Previous page"}
 
                     };
 
