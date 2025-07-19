@@ -135,6 +135,7 @@
         }
 
         $(document).ready(function () {
+            // Toggle password visibility
             $("#show_hide_password a").on('click', function (event) {
                 event.preventDefault();
                 var input = $('#show_hide_password input');
@@ -145,6 +146,20 @@
                 } else {
                     input.attr('type', 'text');
                     icon.removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+            });
+
+            // Check if terms were accepted previously
+            if (localStorage.getItem("termsAccepted") === "true") {
+                $("#termsCheckbox").prop("checked", true);
+            }
+
+            // Store checkbox status
+            $("#termsCheckbox").on("change", function () {
+                if ($(this).is(":checked")) {
+                    localStorage.setItem("termsAccepted", "true");
+                } else {
+                    localStorage.removeItem("termsAccepted");
                 }
             });
         });
@@ -180,7 +195,6 @@
 
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" onclick="login()">Sign in</button>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" onclick="showForgotPasswordScreen()">Forgot Password</button>
-
             </form>
         </div>
     </div>
