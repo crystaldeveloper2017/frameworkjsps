@@ -127,7 +127,7 @@
             };
             xhttp.open("POST", "../?actionName=validateLogin", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("txtusername=" + username.value + "&txtpassword=" + password.value);
+            xhttp.send("txtusername=" + username.value + "&txtpassword=" + password.value+"&app_code=${param.app_code}");
         }
 
         function showForgotPasswordScreen() {
