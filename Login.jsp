@@ -24,6 +24,8 @@
         .form-check { margin-top: 10px; }
         .loader { border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 2s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #currentAppCode { margin-bottom: 10px; text-align: center; font-weight: bold; color: darkblue; display: none; }
+        #currentAppCode a { margin-left: 10px; font-size: 12px; cursor: pointer; }
     </style>
 
     <script>
@@ -73,22 +75,59 @@
             localStorage.setItem("app_code", codeInput);
             $('#appCodeModal').modal('hide');
             toastr.success("App Code saved. Please login now.");
+            updateAppCodeDisplay();
+        }
+
+        function resetAppCode() {
+            localStorage.removeItem("app_code");
+            toastr.info("App Code has been reset. Please enter a new App Code.");
+            updateAppCodeDisplay();
+            $('#appCodeModal').modal('show');
         }
 
         function showForgotPasswordScreen() { alert('Please contact your admin of your organization to reset your password'); }
 
         $(document).ready(function () {
+            // Toggle password visibility
             $("#show_hide_password a").on('click', function (event) {
                 event.preventDefault();
-                var input = $('#show_hide_password input'); var icon = $('#show_hide_password i');
+                var input = $('#show_hide_password input'); 
+                var icon = $('#show_hide_password i');
                 if (input.attr("type") == "text") { input.attr('type','password'); icon.addClass("fa-eye-slash").removeClass("fa-eye"); } 
                 else { input.attr('type','text'); icon.removeClass("fa-eye-slash").addClass("fa-eye"); }
             });
 
+            // Terms checkbox
             if (localStorage.getItem("termsAccepted") === "true") { $("#termsCheckbox").prop("checked", true); }
-            $("#termsCheckbox").on("change", function () {
+            $("#termsCheckbox").on("change", function() {
                 if ($(this).is(":checked")) { localStorage.setItem("termsAccepted","true"); } 
                 else { localStorage.removeItem("termsAccepted"); }
+            });
+
+            // App code display logic
+            function updateAppCodeDisplay() {
+                var appCode = localStorage.getItem("app_code");
+                if (appCode) {
+                    $("#displayAppCode").text(appCode);
+                    $("#currentAppCode").show();
+                } else {
+                    $("#currentAppCode").hide();
+                }
+            }
+            updateAppCodeDisplay();
+
+            $("#changeAppCode").on("click", function(e){
+                e.preventDefault();
+                $('#appCodeModal').modal('show');
+            });
+
+            $("#resetAppCode").on("click", function(e){
+                e.preventDefault();
+                resetAppCode();
+            });
+
+            $("#appCodeModal").on("hide.bs.modal", function() {
+                updateAppCodeDisplay();
             });
 
             if (!localStorage.getItem("app_code")) { $('#appCodeModal').modal('show'); }
@@ -106,6 +145,13 @@
             </div>
 
             <img id="profile-img" src="../img/loginicon.png" class="img-responsive profile-img-card" />
+
+            <!-- Current App Code Display -->
+            <div id="currentAppCode">
+                App Code: <span id="displayAppCode"></span>
+                <a id="changeAppCode">(Change)</a>                
+            </div>
+
             <form method="POST">
                 <input type="text" id="txtusername" maxlength="30" name="txtusername" class="form-control" placeholder="Username" required autofocus>
                 <div class="input-group" id="show_hide_password">
