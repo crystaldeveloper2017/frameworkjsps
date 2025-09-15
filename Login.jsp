@@ -15,63 +15,15 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
 
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            background-repeat: no-repeat;
-            background-image: linear-gradient(rgb(104, 145, 162), lightblue); 
-        }
-
-        .card-container.card {
-            max-width: 350px;
-            padding: 40px 40px;
-        }
-
-        .card {
-            background-color: #F7F7F7;
-            padding: 20px 25px 30px;
-            margin: 50px auto 25px;
-            border-radius: 2px;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .profile-img-card {
-            width: 96px;
-            height: 96px;
-            margin: 0 auto 10px;
-            border-radius: 50%;
-        }
-
-        .btn-signin {
-            background-color: rgb(104, 145, 162);
-            font-weight: 700;
-            font-size: 14px;
-            border-radius: 3px;
-            border: none;
-            transition: all 0.218s;
-        }
-
-        .btn-signin:hover {
-            background-color: rgb(12, 97, 33);
-        }
-
-        .form-check {
-            margin-top: 10px;
-        }
-
-        .loader {
-            border: 16px solid #f3f3f3;
-            border-top: 16px solid #3498db;
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        body, html { height: 100%; margin: 0; background-repeat: no-repeat; background-image: linear-gradient(rgb(104, 145, 162), lightblue); }
+        .card-container.card { max-width: 350px; padding: 40px 40px; }
+        .card { background-color: #F7F7F7; padding: 20px 25px 30px; margin: 50px auto 25px; border-radius: 2px; box-shadow: 0px 2px 2px rgba(0,0,0,0.3); }
+        .profile-img-card { width: 96px; height: 96px; margin: 0 auto 10px; border-radius: 50%; }
+        .btn-signin { background-color: rgb(104,145,162); font-weight:700; font-size:14px; border-radius:3px; border:none; transition:all 0.218s; }
+        .btn-signin:hover { background-color: rgb(12,97,33); }
+        .form-check { margin-top: 10px; }
+        .loader { border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 2s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 
     <script>
@@ -80,9 +32,7 @@
             window.location = 'https://hisaabcloud.in/CustomizedPOS';
         }
 
-        window.addEventListener('keydown', function (e) {
-            if (e.keyCode == 13) login();
-        });
+        window.addEventListener('keydown', function (e) { if (e.keyCode == 13) login(); });
 
         function login() {
             document.getElementById("closebutton").style.display = 'none';
@@ -90,26 +40,16 @@
             var username = document.getElementById("txtusername");
             var password = document.getElementById("txtpassword");
             var termsCheckbox = document.getElementById("termsCheckbox");
+            var appCode = localStorage.getItem("app_code");
 
-            if (username.value == "") {
-                toastr["error"]("Please enter Valid username");
-                toastr.options = { "timeOut": "1000" };
-                username.focus();
+            if (!appCode) {
+                $('#appCodeModal').modal('show');
                 return;
             }
 
-            if (password.value == "") {
-                toastr["error"]("Please enter Valid password");
-                toastr.options = { "timeOut": "1000" };
-                password.focus();
-                return;
-            }
-
-            if (!termsCheckbox.checked) {
-                toastr["error"]("Please agree to the Terms and Conditions");
-                toastr.options = { "timeOut": "1000" };
-                return;
-            }
+            if (username.value == "") { toastr.error("Please enter Valid username"); username.focus(); return; }
+            if (password.value == "") { toastr.error("Please enter Valid password"); password.focus(); return; }
+            if (!termsCheckbox.checked) { toastr.error("Please agree to the Terms and Conditions"); return; }
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
@@ -117,51 +57,41 @@
                     if (this.responseText == "Succesfully Logged In") {
                         window.location = window.location.toString().replace('Login.jsp', '../?a=showHomePage');
                     } else {
-                        toastr["error"](this.responseText);
-                        toastr.options = { "timeOut": "1000" };
-                        username.value = "";
-                        password.value = "";
-                        username.focus();
+                        toastr.error(this.responseText);
+                        username.value = ""; password.value = ""; username.focus();
                     }
                 }
             };
             xhttp.open("POST", "../?actionName=validateLogin", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("txtusername=" + username.value + "&txtpassword=" + password.value+"&app_code=${param.app_code}");
+            xhttp.send("txtusername=" + username.value + "&txtpassword=" + password.value + "&app_code=" + appCode);
         }
 
-        function showForgotPasswordScreen() {
-            alert('Please contact your admin of your organization to reset your password');
+        function saveAppCode() {
+            var codeInput = document.getElementById("inputAppCode").value.trim();
+            if (codeInput == "") { toastr.error("Please enter App Code"); return; }
+            localStorage.setItem("app_code", codeInput);
+            $('#appCodeModal').modal('hide');
+            toastr.success("App Code saved. Please login now.");
         }
+
+        function showForgotPasswordScreen() { alert('Please contact your admin of your organization to reset your password'); }
 
         $(document).ready(function () {
-            // Toggle password visibility
             $("#show_hide_password a").on('click', function (event) {
                 event.preventDefault();
-                var input = $('#show_hide_password input');
-                var icon = $('#show_hide_password i');
-                if (input.attr("type") == "text") {
-                    input.attr('type', 'password');
-                    icon.addClass("fa-eye-slash").removeClass("fa-eye");
-                } else {
-                    input.attr('type', 'text');
-                    icon.removeClass("fa-eye-slash").addClass("fa-eye");
-                }
+                var input = $('#show_hide_password input'); var icon = $('#show_hide_password i');
+                if (input.attr("type") == "text") { input.attr('type','password'); icon.addClass("fa-eye-slash").removeClass("fa-eye"); } 
+                else { input.attr('type','text'); icon.removeClass("fa-eye-slash").addClass("fa-eye"); }
             });
 
-            // Check if terms were accepted previously
-            if (localStorage.getItem("termsAccepted") === "true") {
-                $("#termsCheckbox").prop("checked", true);
-            }
-
-            // Store checkbox status
+            if (localStorage.getItem("termsAccepted") === "true") { $("#termsCheckbox").prop("checked", true); }
             $("#termsCheckbox").on("change", function () {
-                if ($(this).is(":checked")) {
-                    localStorage.setItem("termsAccepted", "true");
-                } else {
-                    localStorage.removeItem("termsAccepted");
-                }
+                if ($(this).is(":checked")) { localStorage.setItem("termsAccepted","true"); } 
+                else { localStorage.removeItem("termsAccepted"); }
             });
+
+            if (!localStorage.getItem("app_code")) { $('#appCodeModal').modal('show'); }
         });
     </script>
 </head>
@@ -178,7 +108,6 @@
             <img id="profile-img" src="../img/loginicon.png" class="img-responsive profile-img-card" />
             <form method="POST">
                 <input type="text" id="txtusername" maxlength="30" name="txtusername" class="form-control" placeholder="Username" required autofocus>
-
                 <div class="input-group" id="show_hide_password">
                     <input class="form-control" type="password" id="txtpassword" placeholder="Password" name="txtpassword">
                     <div class="input-group-addon">
@@ -199,6 +128,22 @@
         </div>
     </div>
 
+    <!-- App Code Modal -->
+    <div class="modal fade" id="appCodeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Enter App Code</h5></div>
+                <div class="modal-body">
+                    <input type="text" id="inputAppCode" class="form-control" placeholder="App Code">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="saveAppCode()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
