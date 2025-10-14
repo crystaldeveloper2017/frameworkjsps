@@ -87,52 +87,80 @@
 
         function showForgotPasswordScreen() { alert('Please contact your admin of your organization to reset your password'); }
 
-        $(document).ready(function () {
-            // Toggle password visibility
-            $("#show_hide_password a").on('click', function (event) {
-                event.preventDefault();
-                var input = $('#show_hide_password input'); 
-                var icon = $('#show_hide_password i');
-                if (input.attr("type") == "text") { input.attr('type','password'); icon.addClass("fa-eye-slash").removeClass("fa-eye"); } 
-                else { input.attr('type','text'); icon.removeClass("fa-eye-slash").addClass("fa-eye"); }
-            });
+       $(document).ready(function () {
+    // Toggle password visibility
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        var input = $('#show_hide_password input'); 
+        var icon = $('#show_hide_password i');
+        if (input.attr("type") === "text") {
+            input.attr('type','password');
+            icon.addClass("fa-eye-slash").removeClass("fa-eye");
+        } else {
+            input.attr('type','text');
+            icon.removeClass("fa-eye-slash").addClass("fa-eye");
+        }
+    });
 
-            // Terms checkbox
-            if (localStorage.getItem("termsAccepted") === "true") { $("#termsCheckbox").prop("checked", true); }
-            $("#termsCheckbox").on("change", function() {
-                if ($(this).is(":checked")) { localStorage.setItem("termsAccepted","true"); } 
-                else { localStorage.removeItem("termsAccepted"); }
-            });
+    // Terms checkbox
+    if (localStorage.getItem("termsAccepted") === "true") {
+        $("#termsCheckbox").prop("checked", true);
+    }
+    $("#termsCheckbox").on("change", function() {
+        if ($(this).is(":checked")) {
+            localStorage.setItem("termsAccepted","true");
+        } else {
+            localStorage.removeItem("termsAccepted");
+        }
+    });
 
-            // App code display logic
-            function updateAppCodeDisplay() {
-                var appCode = localStorage.getItem("app_code");
-                if (appCode) {
-                    $("#displayAppCode").text(appCode);
-                    $("#currentAppCode").show();
-                } else {
-                    $("#currentAppCode").hide();
-                }
-            }
-            updateAppCodeDisplay();
+    // App code logic
+    var appCodeDiv = $("#currentAppCode");
+    var displayAppCode = $("#displayAppCode");
+    var profileImg = $("#profile-img");
+    var appCode = localStorage.getItem("app_code");
 
-            $("#changeAppCode").on("click", function(e){
-                e.preventDefault();
-                $('#appCodeModal').modal('show');
-            });
+    // Always hide App Code initially
+    appCodeDiv.hide();
 
-            $("#resetAppCode").on("click", function(e){
-                e.preventDefault();
-                resetAppCode();
-            });
+    // Set text if exists
+    if (appCode) {
+        displayAppCode.text(appCode);
+    }
 
-            $("#appCodeModal").on("hide.bs.modal", function() {
-                updateAppCodeDisplay();
-            });
+    // Double-click to toggle App Code display
+    profileImg.off("dblclick").on("dblclick", function() {
+        appCodeDiv.toggle();
+    });
 
-            if (!localStorage.getItem("app_code")) { $('#appCodeModal').modal('show'); }
-        });
+    // Change App Code
+    $("#changeAppCode").on("click", function(e){
+        e.preventDefault();
+        $('#appCodeModal').modal('show');
+    });
+
+    // Reset App Code
+    $("#resetAppCode").on("click", function(e){
+        e.preventDefault();
+        resetAppCode();
+    });
+
+    // Update App Code text when modal is hidden
+    $("#appCodeModal").on("hide.bs.modal", function() {
+        var code = localStorage.getItem("app_code");
+        displayAppCode.text(code ? code : "");
+        appCodeDiv.hide(); // keep hidden until double-click
+    });
+
+    // Show modal if no App Code exists
+    if (!appCode) { 
+        $('#appCodeModal').modal('show'); 
+    }
+});
+
+
     </script>
+
 </head>
 
 <body>
@@ -147,7 +175,7 @@
             <img id="profile-img" src="../img/loginicon.png" class="img-responsive profile-img-card" />
 
             <!-- Current App Code Display -->
-            <div id="currentAppCode">
+            <div id="currentAppCode" style="display:none;">
                 App Code: <span id="displayAppCode"></span>
                 <a id="changeAppCode">(Change)</a>                
             </div>
