@@ -15,6 +15,7 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
 
     <style>
+<<<<<<< Updated upstream
         body, html { height: 100%; margin: 0; background-repeat: no-repeat; background-image: linear-gradient(rgb(104, 145, 162), lightblue); }
         .card-container.card { max-width: 350px; padding: 40px 40px; }
         .card { background-color: #F7F7F7; padding: 20px 25px 30px; margin: 50px auto 25px; border-radius: 2px; box-shadow: 0px 2px 2px rgba(0,0,0,0.3); }
@@ -26,6 +27,60 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         #currentAppCode { margin-bottom: 10px; text-align: center; font-weight: bold; color: darkblue; display: none; }
         #currentAppCode a { margin-left: 10px; font-size: 12px; cursor: pointer; }
+=======
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-image: linear-gradient(rgb(104, 145, 162), lightblue); 
+        }
+
+        .card-container.card {
+            max-width: 350px;
+            padding: 40px 40px;
+        }
+
+        .card {
+            background-color: #F7F7F7;
+            padding: 20px 25px 30px;
+            margin: 50px auto 25px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        
+
+        .btn-signin {
+            background-color: rgb(104, 145, 162);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 3px;
+            border: none;
+            transition: all 0.218s;
+        }
+
+        .btn-signin:hover {
+            background-color: rgb(12, 97, 33);
+        }
+
+        .form-check {
+            margin-top: 10px;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+>>>>>>> Stashed changes
     </style>
 
     <script>
