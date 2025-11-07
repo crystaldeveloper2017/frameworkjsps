@@ -446,5 +446,27 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  // example condition
+  var showSidebar = false; // set true/false dynamically
+
+  const sidebar = document.querySelector(".main-sidebar");
+  const contentWrapper = document.querySelector(".content-wrapper");
+  const toggleButton = document.querySelector('[data-widget="pushmenu"]');
+
+  if (!showSidebar) {
+    // hide sidebar
+    if (sidebar) sidebar.remove();
+    if (contentWrapper) contentWrapper.style.marginLeft = "0";
+
+    // hide hamburger icon
+    if (toggleButton) toggleButton.style.display = "none";
+
+    // optional: switch to top-nav layout if you prefer that spacing
+    document.body.classList.remove("sidebar-mini", "layout-fixed");
+    document.body.classList.add("layout-top-nav");
+  }
+});
+
 
 </script>
