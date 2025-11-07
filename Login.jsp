@@ -15,17 +15,130 @@
     <script src="../plugins/toastr/toastr.min.js"></script>
 
     <style>
-        body, html { height: 100%; margin: 0; background-repeat: no-repeat; background-image: linear-gradient(rgb(104, 145, 162), lightblue); }
-        .card-container.card { max-width: 350px; padding: 40px 40px; }
-        .card { background-color: #F7F7F7; padding: 20px 25px 30px; margin: 50px auto 25px; border-radius: 2px; box-shadow: 0px 2px 2px rgba(0,0,0,0.3); }
-        .profile-img-card { margin: 0 auto 10px; }
-        .btn-signin { background-color: rgb(104,145,162); font-weight:700; font-size:14px; border-radius:3px; border:none; transition:all 0.218s; }
-        .btn-signin:hover { background-color: rgb(12,97,33); }
-        .form-check { margin-top: 10px; }
-        .loader { border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 2s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #currentAppCode { margin-bottom: 10px; text-align: center; font-weight: bold; color: darkblue; display: none; }
-        #currentAppCode a { margin-left: 10px; font-size: 12px; cursor: pointer; }
+        /* ====== Soft Champagne Gold Theme ====== */
+        body, html {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(135deg, #f7e7ce, #e6cfb2, #d4b483);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+        }
+
+        .card-container.card {
+            max-width: 350px;
+            padding: 40px 40px;
+        }
+
+        .card {
+            background-color: #fdfaf6;
+            padding: 25px 30px 35px;
+            margin: 50px auto 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid #e3d7c3;
+        }
+
+        .profile-img-card {
+            margin: 0 auto 15px;            
+            height: 80px;
+        }
+
+        .btn-signin {
+            background: linear-gradient(90deg, #c8ad7f, #d4b483);
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: 6px;
+            border: none;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-signin:hover {
+            background: linear-gradient(90deg, #b99b6b, #c4a777);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.25);
+        }
+
+        .form-control {
+            border-radius: 6px;
+            border: 1px solid #cbbd9e;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #b99b6b;
+            box-shadow: 0 0 5px rgba(201,173,127,0.6);
+        }
+
+        .input-group-addon {
+            background: #f4ebdd;
+            border: 1px solid #cbbd9e;
+            border-left: 0;
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .form-check {
+            margin-top: 10px;
+        }
+
+        a {
+            color: #a6864b;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #8c6e3e;
+        }
+
+        #currentAppCode {
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #6e5b3b;
+            display: none;
+        }
+
+        #currentAppCode a {
+            margin-left: 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        /* Loader spinner */
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #c8ad7f;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .modal-content {
+            border-radius: 10px;
+            border: 1px solid #d4b483;
+        }
+
+        .modal-header {
+            background: #f3e7d1;
+            border-bottom: 1px solid #d4b483;
+        }
+
+        .modal-title {
+            color: #6e5b3b;
+            font-weight: 600;
+        }
     </style>
 
     <script>
@@ -85,96 +198,83 @@
             $('#appCodeModal').modal('show');
         }
 
-        function showForgotPasswordScreen() { alert('Please contact your admin of your organization to reset your password'); }
-
-       $(document).ready(function () {
-    // Toggle password visibility
-    $("#show_hide_password a").on('click', function(event) {
-        event.preventDefault();
-        var input = $('#show_hide_password input'); 
-        var icon = $('#show_hide_password i');
-        if (input.attr("type") === "text") {
-            input.attr('type','password');
-            icon.addClass("fa-eye-slash").removeClass("fa-eye");
-        } else {
-            input.attr('type','text');
-            icon.removeClass("fa-eye-slash").addClass("fa-eye");
+        function showForgotPasswordScreen() { 
+            alert('Please contact your admin of your organization to reset your password'); 
         }
-    });
 
-    // Terms checkbox
-    if (localStorage.getItem("termsAccepted") === "true") {
-        $("#termsCheckbox").prop("checked", true);
-    }
-    $("#termsCheckbox").on("change", function() {
-        if ($(this).is(":checked")) {
-            localStorage.setItem("termsAccepted","true");
-        } else {
-            localStorage.removeItem("termsAccepted");
-        }
-    });
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                var input = $('#show_hide_password input'); 
+                var icon = $('#show_hide_password i');
+                if (input.attr("type") === "text") {
+                    input.attr('type','password');
+                    icon.addClass("fa-eye-slash").removeClass("fa-eye");
+                } else {
+                    input.attr('type','text');
+                    icon.removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+            });
 
-    // App code logic
-    var appCodeDiv = $("#currentAppCode");
-    var displayAppCode = $("#displayAppCode");
-    var profileImg = $("#profile-img");
-    var appCode = localStorage.getItem("app_code");
+            if (localStorage.getItem("termsAccepted") === "true") {
+                $("#termsCheckbox").prop("checked", true);
+            }
 
-    // Always hide App Code initially
-    appCodeDiv.hide();
+            $("#termsCheckbox").on("change", function() {
+                if ($(this).is(":checked")) {
+                    localStorage.setItem("termsAccepted","true");
+                } else {
+                    localStorage.removeItem("termsAccepted");
+                }
+            });
 
-    // Set text if exists
-    if (appCode) {
-        displayAppCode.text(appCode);
-    }
+            var appCodeDiv = $("#currentAppCode");
+            var displayAppCode = $("#displayAppCode");
+            var profileImg = $("#profile-img");
+            var appCode = localStorage.getItem("app_code");
 
-    // Double-click to toggle App Code display
-    profileImg.off("dblclick").on("dblclick", function() {
-        appCodeDiv.toggle();
-    });
+            appCodeDiv.hide();
 
-    // Change App Code
-    $("#changeAppCode").on("click", function(e){
-        e.preventDefault();
-        $('#appCodeModal').modal('show');
-    });
+            if (appCode) displayAppCode.text(appCode);
 
-    // Reset App Code
-    $("#resetAppCode").on("click", function(e){
-        e.preventDefault();
-        resetAppCode();
-    });
+            profileImg.off("dblclick").on("dblclick", function() {
+                appCodeDiv.toggle();
+            });
 
-    // Update App Code text when modal is hidden
-    $("#appCodeModal").on("hide.bs.modal", function() {
-        var code = localStorage.getItem("app_code");
-        displayAppCode.text(code ? code : "");
-        appCodeDiv.hide(); // keep hidden until double-click
-    });
+            $("#changeAppCode").on("click", function(e){
+                e.preventDefault();
+                $('#appCodeModal').modal('show');
+            });
 
-    // Show modal if no App Code exists
-    if (!appCode) { 
-        $('#appCodeModal').modal('show'); 
-    }
-});
+            $("#resetAppCode").on("click", function(e){
+                e.preventDefault();
+                resetAppCode();
+            });
 
+            $("#appCodeModal").on("hide.bs.modal", function() {
+                var code = localStorage.getItem("app_code");
+                displayAppCode.text(code ? code : "");
+                appCodeDiv.hide();
+            });
 
+            if (!appCode) { 
+                $('#appCodeModal').modal('show'); 
+            }
+        });
     </script>
-
 </head>
 
 <body>
     <div class="container">
         <div class="card card-container">
             <div class="row">
-                <div align="center" class="col-md-12" style="font-size:30px; font-style: italic; color: darkblue; font-weight: 800;">
+                <div align="center" class="col-md-12" style="font-size:30px; font-style: italic; color:#6e5b3b; font-weight:800;">
                     ${projectName}
                 </div>
             </div>
 
             <img id="profile-img" src="../img/loginicon.png" class="img-responsive profile-img-card" />
 
-            <!-- Current App Code Display -->
             <div id="currentAppCode" style="display:none;">
                 App Code: <span id="displayAppCode"></span>
                 <a id="changeAppCode">(Change)</a>                
@@ -211,7 +311,7 @@
                     <input type="text" id="inputAppCode" class="form-control" placeholder="App Code">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="saveAppCode()">Save</button>
+                    <button type="button" class="btn btn-signin" onclick="saveAppCode()">Save</button>
                 </div>
             </div>
         </div>
@@ -222,10 +322,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body" align="center">
-                    <p id="responseText"><div align="center" class="loader" id="loader"></div></p>
+                    <div align="center" class="loader" id="loader"></div>
                 </div>
                 <div class="modal-footer">
-                    <button id="closebutton" type="button" onclick='location.reload()' class="btn btn-default" data-dismiss="modal">Close Me</button>
+                    <button id="closebutton" type="button" onclick='location.reload()' class="btn btn-signin" data-dismiss="modal">Close Me</button>
                 </div>
             </div>
         </div>
