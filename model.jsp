@@ -344,7 +344,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
   // example condition
-  var showSidebar = false; // set true/false dynamically
+  var showSidebar = true; // set true/false dynamically
 
   const sidebar = document.querySelector(".main-sidebar");
   const contentWrapper = document.querySelector(".content-wrapper");
