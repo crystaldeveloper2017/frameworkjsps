@@ -176,6 +176,157 @@
 </style>
 >>>>>>> Stashed changes
 
+
+
+
+<style>
+    :root {
+      --primary-color: #d4af37; /* gold */
+      --primary-dark: #b89122;
+      --secondary-color: #6c757d; /* neutral grey */
+      --background-color: #f7f7f7;
+      --text-color: #212529;
+      --navbar-bg: #ffffff;
+      --sidebar-bg: #2f2f2f;
+      --sidebar-text: #f1f1f1;
+      --sidebar-hover: #d4af37;
+    }
+
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    /* NAVBAR */
+    .main-header.navbar {
+      background-color: var(--navbar-bg) !important;
+      border-bottom: 2px solid var(--primary-color);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .main-header .nav-link {
+      color: var(--text-color) !important;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .main-header .nav-link:hover {
+      color: var(--primary-dark) !important;
+    }
+
+    /* SIDEBAR */
+    .main-sidebar {
+      background-color: var(--sidebar-bg) !important;
+    }
+
+    .sidebar .nav-link {
+      color: var(--sidebar-text) !important;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar .nav-link.active,
+    .sidebar .nav-link:hover {
+      background-color: rgba(212, 175, 55, 0.15);
+      border-left: 3px solid var(--sidebar-hover);
+      color: var(--sidebar-hover) !important;
+    }
+
+    .nav-sidebar .nav-item > .nav-link p {
+      color: var(--sidebar-text);
+    }
+
+    .nav-sidebar .nav-item > .nav-link p:hover {
+      color: var(--sidebar-hover);
+    }
+
+    /* USER PANEL */
+    .user-panel .info a {
+      color: var(--sidebar-text) !important;
+      font-weight: 600;
+    }
+
+    /* CONTENT AREA */
+    .content-wrapper {
+      background-color: var(--background-color) !important;
+    }
+
+    /* TABLES */
+    table {
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: #fff;
+      text-align: center;
+    }
+
+    td {
+      color: #333;
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    /* MODALS */
+    .modal-content {
+      border-radius: 10px;
+      border: 2px solid var(--primary-color);
+    }
+
+    .modal-footer .btn-danger {
+      background-color: var(--secondary-color);
+      border: none;
+    }
+
+    .modal-footer .btn-danger:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* SIDEBAR SEARCH */
+    .form-control-sidebar {
+      background-color: #3b3b3b !important;
+      color: #fff !important;
+      border: 1px solid #555;
+    }
+
+    .form-control-sidebar::placeholder {
+      color: #bbb;
+    }
+
+    .btn-sidebar {
+      background-color: var(--primary-color);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-sidebar:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* TITLE */
+    #divTitle {
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    *:focus {
+      outline: none !important;
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+    }
+  </style>
+
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-expand layout-fixed">
